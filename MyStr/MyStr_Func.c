@@ -25,7 +25,7 @@ int CheckParameters(const char *s1, const char *s2, const int *out, const char *
         return NULL_STRING_ERROR;
 
     if ((flags & CHECK_OUT_PTR) && out == NULL)
-        return INVALID_FORMAT_ERROR; /* reuse your existing code for "invalid" pointer */
+        return INVALID_FORMAT_ERROR; 
 
     if ((flags & CHECK_BUFFER) && buf == NULL)
         return NULL_BUFFER_ERROR;
@@ -281,17 +281,7 @@ int MyIToA(int _num, char *_buffer)
     _buffer[i] = '\0';
 
     /* reverse the string in buffer */
-    int left = 0;
-    int right = i - 1;
-    while (left < right)
-    {
-        char temp = _buffer[left];
-        _buffer[left] = _buffer[right];
-        _buffer[right] = temp;
-
-        left++;
-        right--;
-    }
+    ReverseStr(_buffer);
 
     return OK;
 }
