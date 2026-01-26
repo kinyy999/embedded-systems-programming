@@ -7,9 +7,9 @@
 #define MIN_ASCII_CHAR   33
 #define MAX_ASCII_CHAR   126
 
-int Check_Parameters(int lines, char ch2print)
+int Check_Parameters(int length, char ch2print)
 {
-    if (lines < MIN_SIZE || lines > MAX_SIZE)
+    if (length < MIN_SIZE || length > MAX_SIZE)
     {
         return SIZE_ERROR;
     }
@@ -22,6 +22,12 @@ int Check_Parameters(int lines, char ch2print)
 
 int Print_line(int length, char ch2print)
 {
+        int result = Check_Parameters(length, ch2print);
+    if (result != OK)
+    {
+        return result;
+    }
+
     for (int j = 0; j < length; j++)
     {
         printf("%c", ch2print);
@@ -31,15 +37,15 @@ int Print_line(int length, char ch2print)
 }
 
 
-int Print_LeftBottom_Aligend_Triag(int lines, char ch2print)
+int Print_LeftBottom_Aligend_Triag(int length, char ch2print)
 {
-    int result = Check_Parameters(lines, ch2print);
+    int result = Check_Parameters(length, ch2print);
     if (result != OK)
     {
         return result;
     }
 
-    for (int i = 1; i <= lines; i++)
+    for (int i = 1; i <= length; i++)
     {
         Print_line(i, ch2print);
     }
@@ -48,15 +54,15 @@ int Print_LeftBottom_Aligend_Triag(int lines, char ch2print)
 }
 
 
-int Print_LeftTop_Aligend_Triag(int lines, char ch2print)
+int Print_LeftTop_Aligend_Triag(int length, char ch2print)
 {
-    int result = Check_Parameters(lines, ch2print);
+    int result = Check_Parameters(length, ch2print);
     if (result != OK)
     {
         return result;
     }
 
-    for (int i = lines; i >= 1; i--)
+    for (int i = length; i >= 1; i--)
     {
         Print_line(i, ch2print);
     }
@@ -65,20 +71,20 @@ int Print_LeftTop_Aligend_Triag(int lines, char ch2print)
 }
 
 
-int Print_RightSide_Diamond(int lines, char ch2print)
+int Print_RightSide_Diamond(int length, char ch2print)
 {
-    int result = Check_Parameters(lines, ch2print);
+    int result = Check_Parameters(length, ch2print);
     if (result != OK)
     {
         return result;
     }
 
-    for (int i = 1; i <= lines; i++)
+    for (int i = 1; i <= length; i++)
     {
         Print_line(i, ch2print);
     }
 
-    for (int i = lines - 1; i >= 1; i--)
+    for (int i = length - 1; i >= 1; i--)
     {
         Print_line(i, ch2print);
     }
@@ -87,17 +93,17 @@ int Print_RightSide_Diamond(int lines, char ch2print)
 }
 
 
-int Print_Pyramid(int lines, char ch2print)
+int Print_Pyramid(int length, char ch2print)
 {
-    int result = Check_Parameters(lines, ch2print);
+    int result = Check_Parameters(length, ch2print);
     if (result != OK)
     {
         return result;
     }
 
-    for (int i = 1; i <= lines; i++)
+    for (int i = 1; i <= length; i++)
     {
-        for (int s = 0; s < lines - i; s++)
+        for (int s = 0; s < length - i; s++)
         {
             printf(" ");
         }
@@ -119,17 +125,22 @@ int Print_Pyramid(int lines, char ch2print)
 
 
 
-int Print_UpSideDown_Pyramid(int lines, char ch2print)
+int Print_UpSideDown_Pyramid(int baseWidth, int length, char ch2print)
 {
-    int result = Check_Parameters(lines, ch2print);
+    int result = Check_Parameters(baseWidth, ch2print);
     if (result != OK)
     {
         return result;
     }
 
-    for (int i = lines; i >= 1; i--)
+    if (length < 1 || length > baseWidth)
     {
-        for (int s = 0; s < lines - i; s++)
+        return SIZE_ERROR;
+    }
+
+    for (int i = length; i >= 1; i--)
+    {
+        for (int s = 0; s < baseWidth - i; s++)
         {
             printf(" ");
         }
@@ -150,16 +161,26 @@ int Print_UpSideDown_Pyramid(int lines, char ch2print)
 
 
 
-int Print_Diamond(int lines, char ch2print)
+
+int Print_Diamond(int length, char ch2print)
 {
-    int result = Check_Parameters(lines, ch2print);
+    int result = Check_Parameters(length, ch2print);
     if (result != OK)
     {
         return result;
     }
 
-    Print_Pyramid(lines, ch2print);
-    Print_UpSideDown_Pyramid(lines - 1, ch2print);
+    result = Print_Pyramid(length, ch2print);
+    if (result != OK)
+    {
+        return result;
+    }
+
+    result = Print_UpSideDown_Pyramid(length, length - 1, ch2print);
+    if (result != OK)
+    {
+        return result;
+    }
 
     return OK;
 }

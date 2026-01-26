@@ -41,7 +41,7 @@ int main(void)
     PrintStatus(status);
 
     printf("\n-- Print_UpSideDown_Pyramid --\n");
-    status = Print_UpSideDown_Pyramid(6, '*');
+    status = Print_UpSideDown_Pyramid(6, 6, '*');
     PrintStatus(status);
 
     printf("\n-- Print_RightSide_Diamond --\n");

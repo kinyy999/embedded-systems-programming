@@ -5,6 +5,29 @@
 #define SIZE_ERROR            -1
 #define CHAR_TO_PRINT_ERROR   -2
 
+
+
+
+/*
+Description -
+Generic parameter validation function for all triangle and pyramid print functions.
+Checks whether the number of lines and the character to print are valid.
+
+Input -
+lines     : Number of lines to print.
+ch2print  : Character to print.
+
+Output -
+OK if all parameters are valid.
+
+Error -
+SIZE_ERROR            : lines is out of allowed range.
+CHAR_TO_PRINT_ERROR   : ch2print is not a valid printable character.
+*/
+int Check_Parameters(int lines, char ch2print);
+
+
+
 /*
 Description - *
               **
@@ -102,7 +125,7 @@ OK or ERROR
 Error -
 SIZE_ERROR or CHAR_TO_PRINT_ERROR
 */
-int Print_UpSideDown_Pyramid(int n, char ch);
+int Print_UpSideDown_Pyramid(int baseWidth, int n, char ch);
 
 /*
 Description -       *
