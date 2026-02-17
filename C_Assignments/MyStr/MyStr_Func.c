@@ -135,22 +135,24 @@ int MyStrncmp(const char *s1, const char *s2, int n)
 
 int ReverseStr(char *_str)
 {
-
     /* Check parameters using general function */
-    int check_res = CheckParameters(_str, NULL, NULL, NULL, 0, CHECK_S1);
-    if (check_res != OK)
+    int check_res;
+    if((check_res =CheckParameters(_str, NULL, NULL, NULL, 0, CHECK_S1))!= OK)
+    {
         return check_res;
+    }
+
 
     char *left = _str;
     char *right = _str;
 
-    /* move right to end of string */
+    /* move right to end of string(use strlen) */
     while (*right != '\0')
         right++;
 
     right--;   /* last valid character */
 
-    /* swap from outside to inside */
+    /* swap from outside to inside(use swamp func) */
     while (left < right)
     {
         char temp = *left;
@@ -171,17 +173,14 @@ int IsPalindrome(char *_str)
     if (check_res != OK)
         return check_res;
 
-
-    if (_str == NULL)
-        return NULL_STRING_ERROR;
-
     char *left = _str;
     char *right = _str;
 
     
     while (*right != '\0')
         right++;
-
+    
+        /*meotar*/
     if (right == _str)      
         return OK;
 
@@ -210,11 +209,11 @@ int MyAToI(char *_str, int *_num)
         return check_res;
 
 
-    /* skip leading spaces */
+    /* skip leading spaces(use func with this name so you don't need to clarrfy) */
     while (*_str == ' ')
         _str++;
 
-    /* handle sign */
+    /* handle sign(same here like the preves one) */
     if (*_str == '-')
     {
         sign = -1;
@@ -224,10 +223,6 @@ int MyAToI(char *_str, int *_num)
     {
         _str++;
     }
-
-    /* must start with digit */
-    if (*_str < '0' || *_str > '9')
-        return NOT_OK;
 
     /* convert digits */
     while (*_str >= '0' && *_str <= '9')
@@ -276,8 +271,9 @@ int MyIToA(int _num, char *_buffer)
 
     /* add minus sign if needed */
     if (sign == -1)
+    {
         _buffer[i++] = '-';
-
+    }
     _buffer[i] = '\0';
 
     /* reverse the string in buffer */

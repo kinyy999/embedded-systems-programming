@@ -180,9 +180,7 @@ int main()
     printBits(n);
     printf("Answer: %u\n", BitMirror(n));
     printBits(BitMirror(n));
-    printf("LUT:\n");
    
-    printf("LUT:\n");
 
 
     unsigned int m;
@@ -194,53 +192,7 @@ int main()
     printf("3rd set bit index = %d\n", IndexOfThirdSetBit_LUT(m));
 
     
-    /*
-    for (int i = 0; i < BYTE_VALUES; i++)
-    {
-        printf("bitCountLUT[%d] = %d \n",i ,bitCountLUT[i]);
-    }
    
-   
-    for (int i = 0; i < BYTE_VALUES; i++)
-    {
-        printf("mirrorLUT[i][%d] = %d \n",i ,mirrorLUT[i]);
-    }
-    */
     return 0;
 }
  
-/*
-unsigned int Majority(unsigned int n)
-{
-    int bitcount = 0;
-    for (int i = 0; i < sizeof(int)*8; i++)
-    {
-        if ((n>>i)&1)
-        {
-            ++bitcount;
-        }
-    }
-    
-    if (bitcount > sizeof(int)*4)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-    
-}
-
-int main(void)
-{
-    unsigned int n;
-
-    printf("enter a number: \n");
-    scanf("%u",&n);
-
-    printf("is %u have majority of he's bit's turned on?\n 1 if yes\n",n);
-    int  x;
-    x = Majority(n);
-    printf("awnser: %d \n",x);
-}*/
