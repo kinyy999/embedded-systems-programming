@@ -22,9 +22,9 @@ void* PrintFunc(void* tid)
     for (int j = 0; j < NUMBER_OF_ITER; j++)
     {
         l_num++; 
-        sem_wait(&mutex);     
+        //sem_wait(&mutex);     
         g_num++;   
-        sem_post(&mutex);
+        //sem_post(&mutex);
 
 
         if (j % 250000 == 0)
@@ -44,7 +44,7 @@ int main()
 {
     pthread_t threads[NUM_OF_THREADS];
     int indx[NUM_OF_THREADS];
-    sem_init(&mutex,0,1);
+    //sem_init(&mutex,0,1);
     for (int i = 0; i < NUM_OF_THREADS; i++)
     {
         indx[i] = i;
@@ -72,7 +72,7 @@ int main()
 
     printf("\nExpected global = %d\n", NUM_OF_THREADS * NUMBER_OF_ITER);
     printf("Actual   global = %d\n", g_num);
-    sem_destroy(&mutex);
+    //sem_destroy(&mutex);
 
     return 0;
 }
