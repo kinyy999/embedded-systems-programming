@@ -1,7 +1,10 @@
 #ifndef _VISIT_CARD_H_
 #define _VISIT_CARD_H_
 
+#pragma once
 #include <iostream>
+#include <string>
+
 using namespace std;
 
 class Patient;
@@ -11,34 +14,32 @@ class Employee;
 class VisitCard
 {
 private:
-    Patient*    patient;      
-    Department* department;    
-    Employee*   caregiver;    
+    Patient* patient;
+    Department* department;
+    Employee* caregiver;
 
-    char* arrivalDate;         
-    char* purpose;            
-
-    void setStr(char*& dest, const char* src);
+    string arrivalDate;
+    string purpose;
 
 public:
-    VisitCard(Patient* p, Department* dep, const char* arrivalDate, const char* purpose);
+    VisitCard(Patient* patient,
+              Department* department,
+              Employee* caregiver,
+              const string& arrivalDate,
+              const string& purpose);
 
-    VisitCard(const VisitCard& other) = delete;
-    VisitCard& operator=(const VisitCard& other) = delete;
+    ~VisitCard() = default;
 
-    ~VisitCard();
+    Patient* getPatient() const;
+    Department* getDepartment() const;
+    Employee* getCaregiver() const;
 
-    Patient* getPatient() const { return patient; }
-    Department* getDepartment() const { return department; }
-    Employee* getCaregiver() const { return caregiver; }
-
-    const char* getArrivalDate() const { return arrivalDate; }
-    const char* getPurpose() const { return purpose; }
-
-    void setCaregiver(Employee* e) { caregiver = e; }
+    const string& getArrivalDate() const;
+    const string& getPurpose() const;
 
     void toOs(ostream& os) const;
-    friend ostream& operator<<(ostream& os, const VisitCard& v);
+
+    friend ostream& operator<<(ostream& os, const VisitCard& visit);
 };
 
 #endif

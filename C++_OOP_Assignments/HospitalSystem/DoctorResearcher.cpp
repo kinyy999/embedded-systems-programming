@@ -2,13 +2,12 @@
 using namespace std;
 
 #include "DoctorResearcher.h"
-#include "Department_Header.h"
-
+#include "Department.h"
 
 DoctorResearcher::DoctorResearcher(const string& name, const string& specialization, int maxArticles)
-    : Employee(name),               
-      Doctor(name, specialization), 
-      Researcher(name, maxArticles) 
+    : Employee(name),
+      Doctor(name, specialization),
+      Researcher(name, maxArticles)
 {
 }
 
@@ -21,7 +20,8 @@ DoctorResearcher::DoctorResearcher(const DoctorResearcher& other)
 
 DoctorResearcher& DoctorResearcher::operator=(const DoctorResearcher& other)
 {
-    if (this == &other) return *this;
+    if (this == &other)
+        return *this;
 
     Employee::operator=(other);
     Doctor::operator=(other);
@@ -37,23 +37,23 @@ void DoctorResearcher::toOs(ostream& os) const
     Employee::toOs(os);
 
     const string spec = getSpecialization();
-    os << " | Specialization: " << (!spec.empty() ? spec : "");
+    os << " | Specialization: " << (spec.empty() ? "" : spec);
 
-
-    if (getDepartment())
+    if (getDepartment() != nullptr)
         os << " | Department: " << getDepartment()->getDepartmentName();
 
-    os << " | Articles: " << getNumOfArticles()<<endl;
-    if (getNumOfArticles() > 0)
+    const int n = getNumOfArticles();
+    os << " | Articles: " << n;
+
+    if (n > 0)
     {
         os << " [";
-        for (int i = 0; i < getNumOfArticles(); i++)
+        for (int i = 0; i < n; i++)
         {
             os << getArticle(i);
-           if (i != getNumOfArticles() - 1)
+            if (i != n - 1)
                 os << " ; ";
         }
         os << " ]";
     }
-
 }

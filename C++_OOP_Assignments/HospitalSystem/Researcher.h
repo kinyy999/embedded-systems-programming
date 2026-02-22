@@ -3,6 +3,11 @@
 
 #include <list>
 #include <string>
+#include <iostream>
+#include <stdexcept>
+
+using namespace std;
+
 #include "Employee.h"
 #include "Article.h"
 
@@ -10,9 +15,11 @@ class Researcher : virtual public Employee
 {
 private:
     list<Article> articles;
+    int maxArticles;   
 
 public:
-    Researcher(const string& name, int maxArticles = 2);  
+    Researcher(const string& name, int maxArticles = 2);
+
     Researcher(const Researcher& other) = default;
     Researcher& operator=(const Researcher& other) = default;
     virtual ~Researcher() = default;

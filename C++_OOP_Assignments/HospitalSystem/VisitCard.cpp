@@ -1,52 +1,61 @@
 #include "VisitCard.h"
-#include <cstring>
-
 #include "Patient.h"
-#include "Department_Header.h"
+#include "Department.h"
 #include "Employee.h"
 
-void VisitCard::setStr(char*& dest, const char* src)
+#include <iostream>
+using namespace std;
+
+VisitCard::VisitCard(Patient* patient,
+                     Department* department,
+                     Employee* caregiver,
+                     const string& arrivalDate,
+                     const string& purpose)
+    : patient(patient),
+      department(department),
+      caregiver(caregiver),
+      arrivalDate(arrivalDate),
+      purpose(purpose)
 {
-    if (!src) src = "";
-    delete[] dest;
-    dest = new char[strlen(src) + 1];
-    strcpy(dest, src);
 }
 
-VisitCard::VisitCard(Patient* p, Department* dep, const char* aDate, const char* purp)
-    : patient(p),
-      department(dep),
-      caregiver(nullptr),
-      arrivalDate(nullptr),
-      purpose(nullptr)
+Patient* VisitCard::getPatient() const
 {
-    setStr(arrivalDate, aDate);
-    setStr(purpose, purp);
+    return patient;
 }
 
-VisitCard::~VisitCard()
+Department* VisitCard::getDepartment() const
 {
-    delete[] arrivalDate;
-    delete[] purpose;
+    return department;
+}
+
+Employee* VisitCard::getCaregiver() const
+{
+    return caregiver;
+}
+
+const string& VisitCard::getArrivalDate() const
+{
+    return arrivalDate;
+}
+
+const string& VisitCard::getPurpose() const
+{
+    return purpose;
 }
 
 void VisitCard::toOs(ostream& os) const
 {
     os << "VisitCard\n";
     os << "Patient: " << *patient << "\n";
-    os << "ArrivalDate: " << (arrivalDate ? arrivalDate : "") << "\n";
-    os << "Purpose: " << (purpose ? purpose : "") << "\n";
-    os << "Department: " << (department ? department->getDepartmentName() : "None") << "\n";
-
-    os << "Caregiver: ";
-    if (caregiver)
-        os << *caregiver << "\n";
-    else
-        os << "None\n";
+    os << "ArrivalDate: " << arrivalDate << "\n";
+    os << "Purpose: " << purpose << "\n";
+    os << "Department: " << department->getDepartmentName() << "\n";
+    os << "Caregiver: " << *caregiver << "\n";
 }
 
-ostream& operator<<(ostream& os, const VisitCard& v)
+ostream& operator<<(ostream& os, const VisitCard& visit)
 {
-    v.toOs(os);
+    visit.toOs(os);
     return os;
 }

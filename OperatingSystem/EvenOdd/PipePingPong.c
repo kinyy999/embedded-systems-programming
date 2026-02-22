@@ -10,17 +10,22 @@
 
 int main()
 {
-    int p2c[2];   // parent to child
-    int c2p[2];   // child to parent
+    int p2c[2];               // parent to child
+    int c2p[2];                 // child to parent
     pid_t pid;
     char buf[BUF_SIZE];
 
-    if (pipe(p2c) == -1 || pipe(c2p) == -1)
+    if (pipe(p2c) == -1 )
     {
         perror("pipe");
         exit(1);
     }
 
+    if (pipe(c2p) == -1)
+    {
+        perror("pipe");
+        exit(1);
+    }
     pid = fork();
 
     if (pid < 0)

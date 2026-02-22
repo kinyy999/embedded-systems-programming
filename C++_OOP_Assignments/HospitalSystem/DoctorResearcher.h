@@ -1,7 +1,7 @@
 #ifndef _DOCTOR_RESEARCHER_H_
 #define _DOCTOR_RESEARCHER_H_
 
-#include "Doctor_Header.h"
+#include "Doctor.h"
 #include "Researcher.h"
 
 class DoctorResearcher : public Doctor, public Researcher

@@ -4,26 +4,33 @@ using namespace std;
 #include "Researcher.h"
 
 Researcher::Researcher(const string& name, int maxArticles)
-    : Employee(name)
+    : Employee(name), maxArticles(maxArticles)
 {
 }
 
 bool Researcher::addArticle(const Article& a)
 {
+    // enforce the limit
+    if ((int)articles.size() >= maxArticles)
+        return false;
+
     articles.push_back(a);
     return true;
 }
 
 Researcher& Researcher::operator+=(const Article& a)
 {
-    articles.push_back(a);
+    addArticle(a);   
     return *this;
 }
 
 const Article& Researcher::getArticle(int index) const
 {
+    if (index < 0 || index >= (int)articles.size())
+        throw out_of_range("Researcher::getArticle - index out of range");
+
     auto it = articles.begin();
-    std::advance(it, index);
+    advance(it, index);
     return *it;
 }
 

@@ -9,17 +9,18 @@ class Article
 private:
     string title;
     string journal;
-    int   year;
+    int year;
 
 public:
     Article(const string& title = "", const string& journal = "", int year = 0);
-    Article(const Article& other);
-    Article& operator=(const Article& other);
-    ~Article();
+
+    Article(const Article& other) = default;
+    Article& operator=(const Article& other) = default;
+    ~Article() = default;
 
     const string& getTitle() const   { return title; }
     const string& getJournal() const { return journal; }
-    int getYear() const            { return year; }
+    int getYear() const              { return year; }
 
     void toOs(ostream& os) const;
     friend ostream& operator<<(ostream& os, const Article& a);
